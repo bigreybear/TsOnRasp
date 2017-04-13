@@ -17,6 +17,14 @@ import java.security.cert.TrustAnchor;
 public class cltForRasp {
     static Socket server;
 
+    private static void watchDog(){
+        OperatingSystemMXBean osmxb = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
+
+        System.out.println(osmxb.getProcessCpuTime());
+        System.out.println(osmxb.getSystemLoadAverage());
+
+    }
+
     private  void seeMemory(){
         OperatingSystemMXBean osmxb = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         long TotalPhysicalMemorySize = osmxb.getTotalPhysicalMemorySize();
@@ -56,10 +64,11 @@ public class cltForRasp {
         System.out.println("hellow word");
         cltForRasp cfr = new cltForRasp();
         cfr.seeMemory();
-        PrintWriter pw = cltForRasp.connetToServer();
-        pw.println("now we are connected");
-        pw.flush();
-        cltForRasp.talkTester(pw);
+        cltForRasp.watchDog();
+//        PrintWriter pw = cltForRasp.connetToServer();
+//        pw.println("now we are connected");
+//        pw.flush();
+//        cltForRasp.talkTester(pw);
 
     }
 }
