@@ -19,12 +19,12 @@ public class cltForRasp {
 
     private  void seeMemory(){
         OperatingSystemMXBean osmxb = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-        long totalvirtualMemory = osmxb.getTotalSwapSpaceSize();
+        long TotalPhysicalMemorySize = osmxb.getTotalPhysicalMemorySize();
         long freePhysicalMemorySize = osmxb.getFreePhysicalMemorySize();
 
-        System.out.println(totalvirtualMemory);
+        System.out.println(TotalPhysicalMemorySize);
         System.out.println(freePhysicalMemorySize);
-        Double compare =  (1 - freePhysicalMemorySize * 1.0 / totalvirtualMemory) * 100;
+        Double compare =  (1 - freePhysicalMemorySize * 1.0 / TotalPhysicalMemorySize) * 100;
 
         // String str = compare.intValue() + "%";
         System.out.println(compare);
