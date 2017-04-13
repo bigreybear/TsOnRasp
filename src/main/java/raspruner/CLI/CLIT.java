@@ -1,10 +1,14 @@
 package raspruner.CLI;
 
 
+import com.sun.management.OperatingSystemMXBean;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -14,6 +18,19 @@ import java.util.Date;
  * Created by Leon on 2017/4/13.
  */
 public class CLIT {
+
+    public static Double getMemery() {
+
+        OperatingSystemMXBean osmxb = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
+        long totalvirtualMemory = osmxb.getTotalSwapSpaceSize();
+        long freePhysicalMemorySize = osmxb.getFreePhysicalMemorySize();
+        Double compare =  (1 - freePhysicalMemorySize * 1.0 / totalvirtualMemory) * 100;
+
+        // String str = compare.intValue() + "%";
+        return compare;
+
+    }
+
     static Socket server;
 
     private static void getMemoryInfoBy (int freq, PrintWriter pw)throws InterruptedException{
@@ -21,7 +38,7 @@ public class CLIT {
         Long stime = System.currentTimeMillis();
         Double ncompare = 0.0;
         while(count<=freq){
-            ncompare = WindowsInfoUtil.getMemery();
+            ncompare = CLIT.getMemery();
             pw.println(ncompare);
             pw.flush();
 //            System.out.println(ncompare);
