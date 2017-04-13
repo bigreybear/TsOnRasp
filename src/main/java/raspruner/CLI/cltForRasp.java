@@ -1,6 +1,5 @@
 package raspruner.CLI;
 
-import cn.edu.thu.tsfile.timeseries.write.record.datapoint.DoubleDataPoint;
 
 /**
  * Created by BD-Loen on 2017/4/13.
